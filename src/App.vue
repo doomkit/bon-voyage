@@ -1,11 +1,7 @@
 <template>
-	<div class="h-10 w-10 bg-blue-500"></div>
+	<router-view v-slot="slotProps">
+		<component :is="slotProps.Component"></component>
+	</router-view>
 </template>
-
-<script>
-	export default {
-		name: 'App',
-	};
-</script>
 
 <style src="./assets/main.css"></style>
