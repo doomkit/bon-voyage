@@ -48,7 +48,7 @@ const app = createApp(App);
 
 app.use(router);
 app.component('font-awesome-icon', FontAwesomeIcon);
-app.prototype.$http = Axios;
+app.config.globalProperties.$http = Axios;
 
 router.isReady().then(() => {
 	app.mount('#app');
