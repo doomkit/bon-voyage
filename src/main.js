@@ -24,6 +24,7 @@ import App from './app.vue';
 import Button from './components/ui/button';
 
 import { isAuthenticated } from './services/auth';
+import { ClickOutsideDirective } from './directives/click-outside';
 
 library.add([faUserCircle, faUnlockAlt, faSignInAlt, faEnvelope, faSignOutAlt]);
 
@@ -67,3 +68,6 @@ router.isReady().then(() => {
 // Components
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.component('the-button', Button);
+
+// Directives
+app.directive('click-outside', ClickOutsideDirective);
