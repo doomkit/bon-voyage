@@ -8,7 +8,7 @@
 		</h1>
 		<p class="text-gray-700 mb-6">
 			Not a member?
-			<router-link to="/registration" v-slot="{ href, navigate }">
+			<router-link :to="{ name: 'Registration' }" v-slot="{ href, navigate }">
 				<a
 					:href="href"
 					@click="navigate"

@@ -14,12 +14,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // Pages
-import Dashboard from './pages/dashboard.vue';
 import Login from './pages/login.vue';
 import Registration from './pages/registration.vue';
 import Trips from './pages/trips.vue';
 
 // Components
+import Dashboard from './pages/dashboard.vue';
 import App from './app.vue';
 import Button from './components/ui/button';
 
@@ -36,7 +36,11 @@ const router = createRouter({
 			children: [{ path: '', name: 'Dashboard', component: Trips }],
 		},
 		{ path: '/login', name: 'Login', component: Login },
-		{ path: '/registration', name: 'Registration', component: Registration },
+		{
+			path: '/registration',
+			name: 'Registration',
+			component: Registration,
+		},
 		{ path: '', redirect: { name: 'Dashboard' } },
 		{ path: '/:catchAll(.*)', redirect: { name: 'Dashboard' } },
 	],

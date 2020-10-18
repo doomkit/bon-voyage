@@ -18,7 +18,7 @@
 	export default {
 		props: {
 			text: String,
-			path: String,
+			path: Object,
 		},
 	};
 </script>

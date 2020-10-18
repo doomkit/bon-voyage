@@ -8,7 +8,7 @@
 		</h1>
 		<p class="text-gray-700 mb-6">
 			Already a member?
-			<router-link to="/login" v-slot="{ href, navigate }">
+			<router-link :to="{ name: 'Login' }" v-slot="{ href, navigate }">
 				<a
 					:href="href"
 					@click="navigate"
@@ -69,13 +69,11 @@
 
 <script>
 	import TheInput from './../components/forms/input';
-	import TheButton from './../components/ui/button';
 
 	export default {
-		components: { TheInput, TheButton },
+		components: { TheInput },
 		setup() {
 			function onSubmit(e) {
-				// event.preventDefault();
 				console.log('submitted', e);
 			}
 

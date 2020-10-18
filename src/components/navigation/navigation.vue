@@ -148,13 +148,13 @@
 		data() {
 			return {
 				mainItems: [
-					{ text: 'Dashboard', path: '/dashboard' },
-					{ text: 'Login', path: '/login' },
-					{ text: 'Registration', path: '/registration' },
+					{ text: 'Dashboard', path: { name: 'Dashboard' } },
+					{ text: 'Login', path: { name: 'Login' } },
+					{ text: 'Registration', path: { name: 'Registration' } },
 				],
 				otherItems: [
-					{ text: 'Profile', path: '/profile' },
-					{ text: 'Sign out', path: '/login' },
+					// { text: 'Profile', path: { name: 'Profile' } },
+					{ text: 'Sign out', path: { name: 'Login' } },
 				],
 				showMenu: false, // Mobile resolution
 			};
