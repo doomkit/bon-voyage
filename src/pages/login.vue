@@ -19,28 +19,43 @@
 			</router-link>
 		</p>
 		<div
-			class="w-full md:w-3/4 lg:w-1/2 bg-gray-800 rounded-lg py-6 px-4 sm:px-6 shadow-2xl"
+			class="w-full md:w-3/4 lg:w-1/2 bg-gray-800 shadow-2xl rounded-lg py-6 px-4 sm:px-6 mb-4"
 		>
-			<form @submit.prevent="onSubmit" class="space-y-2">
-				<the-input
-					label="Username"
-					placeholder="Username"
-					iconClass="user-circle"
-					name="username"
-					type="text"
-					autocomplete="off"
-					v-model="username"
-				></the-input>
-				<the-input
-					label="Password"
-					placeholder="Password"
-					iconClass="unlock-alt"
-					name="password"
-					type="password"
-					autocomplete="new-password"
-					v-model="password"
-				></the-input>
-
+			<form @submit.prevent="onSubmit" class="space-y-2 relative">
+				<div class="relative">
+					<the-input
+						label="Username"
+						placeholder="Username"
+						iconClass="user-circle"
+						name="username"
+						type="text"
+						autocomplete="off"
+						v-model="username"
+					></the-input>
+					<p
+						class="absolute right-0 text-red-700 text-sm transition duration-300"
+						:class="[invalidForm && !username ? 'opacity-1' : 'opacity-0']"
+					>
+						Please enter your username
+					</p>
+				</div>
+				<div class="relative">
+					<the-input
+						label="Password"
+						placeholder="Password"
+						iconClass="unlock-alt"
+						name="password"
+						type="password"
+						autocomplete="new-password"
+						v-model="password"
+					></the-input>
+					<p
+						class="absolute right-0 text-red-700 text-sm transition duration-300"
+						:class="[invalidForm && !password ? 'opacity-1' : 'opacity-0']"
+					>
+						Please enter your password
+					</p>
+				</div>
 				<div class="pt-6">
 					<the-button
 						text="Sign in"
@@ -50,32 +65,51 @@
 				</div>
 			</form>
 		</div>
+		<p
+			class="text-red-700 text-right text-sm transition duration-300"
+			:class="[invalidForm && !invalidForm ? 'opacity-1' : 'opacity-0']"
+		>
+			Failed to login. Wrong username or password.
+		</p>
 	</div>
 </template>
 
 <script>
 	import { ref } from 'vue';
 	import { useRouter } from 'vue-router';
+	// import { ref, reactive, computed } from "@vue/composition-api"
 
 	import TheInput from './../components/forms/input';
-	import TheButton from './../components/ui/button';
+	import { login } from '../services/auth';
 
 	export default {
-		components: { TheInput, TheButton },
+		components: { TheInput },
 		setup() {
 			const router = useRouter();
 
 			let username = ref('');
 			let password = ref('');
+			let invalidForm = ref(false);
+			let loginFailed = ref(false);
 
 			function onSubmit() {
-				console.log(`${username.value}:${password.value}`);
-				router.push('/dashboard');
+				if (!username.value.length || !password.value.length) {
+					invalidForm.value = true;
+					return;
+				}
+				const loggedIn = login(username.value, password.value);
+				if (loggedIn) router.push('/dashboard');
+				else {
+					// TODO: show error message
+					loginFailed.value = true;
+				}
 			}
 
 			return {
 				username,
 				password,
+				invalidForm,
+				loginFailed,
 				onSubmit,
 			};
 		},
