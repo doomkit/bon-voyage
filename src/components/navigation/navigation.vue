@@ -1,16 +1,15 @@
 <template>
-	<div>
-		<nav class="bg-gray-800">
+	<div class="relative" style="height: 64px">
+		<nav class="absolute z-20 w-full bg-gray-800">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex items-center justify-between h-16">
 					<div class="flex items-center">
 						<div class="flex-shrink-0">
-							<img
-								class="h-8 w-8"
-								src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
-								alt="Workflow logo"
-							/>
+							<img class="h-8 w-8" src="@/assets/logo.svg" />
 						</div>
+						<span class="mx-2 font-bold text-indigo-600 select-none"
+							>Bon voyage</span
+						>
 						<div class="hidden md:block">
 							<div class="ml-10 flex items-baseline space-x-4">
 								<navigation-link
@@ -28,18 +27,17 @@
 							<!-- Profile dropdown -->
 							<div class="ml-3 relative">
 								<div>
-									<button
-										class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-										id="user-menu"
-										aria-label="User menu"
-										aria-haspopup="true"
-									>
-										<img
-											class="h-8 w-8 rounded-full"
-											src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-											alt=""
-										/>
-									</button>
+									<dropdown v-model:show="showDropdown" :items="dropdownItems">
+										<button
+											class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
+											id="user-menu"
+											aria-label="User menu"
+											aria-haspopup="true"
+											@click.stop="showDropdown = !showDropdown"
+										>
+											<div class="h-8 w-8 rounded-full bg-gray-500"></div>
+										</button>
+									</dropdown>
 								</div>
 								<!--
                 Profile dropdown panel, show/hide based on dropdown state.
@@ -57,7 +55,7 @@
 					<div class="-mr-2 flex md:hidden">
 						<!-- Mobile menu button -->
 						<button
-							@click="toggleMenu()"
+							@click="showMenu = !showMenu"
 							class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
 						>
 							<svg
@@ -86,15 +84,13 @@
 					</div>
 				</div>
 			</div>
+		</nav>
 
-			<!--
-      Mobile menu, toggle classes based on menu state.
-
-      Open: "block", closed: "hidden"
-    -->
+		<transition name="menu">
 			<div
-				:class="[showMenu && 'block', !showMenu && 'hidden']"
-				class="md:hidden"
+				v-if="showMenu"
+				class="md:hidden absolute z-10 right-0 w-full bg-gray-800 rounded-b-lg"
+				style="margin-top: 64px"
 			>
 				<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 					<navigation-link
@@ -102,18 +98,14 @@
 						:key="item"
 						:text="item.text"
 						:path="item.path"
-						@click="toggleMenu"
+						@click="showMenu = !showMenu"
 						class="block"
 					></navigation-link>
 				</div>
 				<div class="pt-4 pb-3 border-t border-gray-700">
 					<div class="flex items-center px-5 space-x-3">
 						<div class="flex-shrink-0">
-							<img
-								class="h-10 w-10 rounded-full"
-								src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-								alt=""
-							/>
+							<div class="h-8 w-8 rounded-full bg-gray-500"></div>
 						</div>
 						<div class="space-y-1">
 							<div class="text-base font-medium leading-none text-white">
@@ -126,25 +118,26 @@
 					</div>
 					<div class="mt-3 px-2 space-y-1">
 						<navigation-link
-							v-for="item in otherItems"
+							v-for="item in dropdownItems"
 							:key="item"
 							:text="item.text"
 							:path="item.path"
-							@click="toggleMenu"
+							@click="showMenu = !showMenu"
 							class="block"
 						></navigation-link>
 					</div>
 				</div>
 			</div>
-		</nav>
+		</transition>
 	</div>
 </template>
 
 <script>
 	import NavigationLink from './navigation-link';
+	import Dropdown from '../ui/dropdown';
 
 	export default {
-		components: { NavigationLink },
+		components: { NavigationLink, Dropdown },
 		data() {
 			return {
 				mainItems: [
@@ -152,19 +145,33 @@
 					{ text: 'Login', path: { name: 'Login' } },
 					{ text: 'Registration', path: { name: 'Registration' } },
 				],
-				otherItems: [
-					// { text: 'Profile', path: { name: 'Profile' } },
+				dropdownItems: [
+					// TODO: add Profile path
+					{ text: 'Profile', path: { name: 'Dashboard' } },
 					{ text: 'Sign out', path: { name: 'Login' } },
 				],
+				showDropdown: false,
 				showMenu: false, // Mobile resolution
 			};
-		},
-		methods: {
-			toggleMenu() {
-				this.showMenu = !this.showMenu;
-			},
 		},
 	};
 </script>
 
-<style></style>
+<style>
+	.menu-enter-from,
+	.menu-leave-to {
+		opacity: 0;
+		transform: scale(0.95);
+		transform: translateY(-100%);
+	}
+	.menu-enter-to,
+	.menu-leave-from {
+		opacity: 1;
+		transform: scale(1);
+		transform: translateY(0);
+	}
+	.menu-enter-active,
+	.menu-leave-active {
+		transition: all 0.5s ease-in;
+	}
+</style>
