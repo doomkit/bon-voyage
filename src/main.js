@@ -17,6 +17,7 @@ import {
 import Login from './pages/login.vue';
 import Registration from './pages/registration.vue';
 import Trips from './pages/trips.vue';
+import Profile from './pages/profile';
 
 // Components
 import Dashboard from './pages/dashboard.vue';
@@ -34,7 +35,10 @@ const router = createRouter({
 		{
 			path: '/dashboard',
 			component: Dashboard,
-			children: [{ path: '', name: 'Dashboard', component: Trips }],
+			children: [
+				{ path: '', name: 'Dashboard', component: Trips },
+				{ path: 'profile', name: 'Profile', component: Profile },
+			],
 		},
 		{ path: '/login', name: 'Login', component: Login },
 		{

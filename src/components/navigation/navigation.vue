@@ -74,7 +74,7 @@
 				],
 				dropdownItems: [
 					// TODO: add Profile path
-					{ text: 'Profile', path: { name: 'Dashboard' } },
+					{ text: 'Profile', path: { name: 'Profile' } },
 					{ text: 'Sign out', path: { name: 'Login' } },
 				],
 				showDropdown: false,
