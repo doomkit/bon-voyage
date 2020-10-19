@@ -55,7 +55,13 @@ router.beforeEach((to, from, next) => {
 	// TODO: load auth state
 	const sessionExist = isAuthenticated();
 
-	if (to.name !== 'Login' && to.name !== 'Registration' && !sessionExist) {
+	if ((to.name === 'Login' || to.name == 'Registration') && sessionExist) {
+		next({ name: 'Dashboard' });
+	} else if (
+		to.name !== 'Login' &&
+		to.name !== 'Registration' &&
+		!sessionExist
+	) {
 		next({ name: 'Login' });
 	} else next();
 });
