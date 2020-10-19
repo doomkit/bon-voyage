@@ -33,12 +33,7 @@
 	export default {
 		props: {
 			show: Boolean,
-			items: Object,
-		},
-		methods: {
-			close() {
-				this.$emit('close', null);
-			},
+			items: Array,
 		},
 	};
 </script>
