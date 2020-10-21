@@ -77,7 +77,6 @@
 <script>
 	import { ref } from 'vue';
 	import { useRouter } from 'vue-router';
-	// import { ref, reactive, computed } from "@vue/composition-api"
 
 	import TheInput from './../components/forms/input';
 	import { login } from '../services/auth';
