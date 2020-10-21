@@ -3,7 +3,6 @@
 		<div
 			v-if="show"
 			class="md:hidden absolute z-10 right-0 w-full bg-gray-800 rounded-b-lg"
-			style="margin-top: 64px"
 		>
 			<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 				<navigation-link

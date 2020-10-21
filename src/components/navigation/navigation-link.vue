@@ -7,7 +7,7 @@
 				isExactActive && 'text-white bg-gray-900',
 				!isExactActive && 'text-gray-300 hover:bg-gray-700',
 			]"
-			class="text-base block px-3 py-2 rounded-md font-medium hover:text-white focus:outline-none focus:bg-gray-700"
+			class="text-base block px-3 py-2 rounded-md font-medium hover:text-white focus:outline-none"
 		>
 			{{ text }}
 		</a>

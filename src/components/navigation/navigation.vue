@@ -1,6 +1,6 @@
 <template>
-	<div class="relative" style="height: 64px">
-		<nav class="absolute z-20 w-full bg-gray-800">
+	<div class="relative">
+		<nav class="absolute z-20 bottom-0 w-full bg-gray-800">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex items-center justify-between h-16">
 					<div class="flex items-center">
@@ -58,28 +58,40 @@
 </template>
 
 <script>
+	import { useRouter } from 'vue-router';
+	import { ref } from 'vue';
+
 	import NavigationLink from './navigation-link';
 	import Dropdown from '../ui/dropdown';
 	import MobileMenu from './mobile-menu';
 	import HamburgerButton from './hamburger-button';
 
+	import { logout } from './../../services/auth';
+
 	export default {
 		components: { NavigationLink, Dropdown, MobileMenu, HamburgerButton },
-		data() {
-			return {
-				mainItems: [
-					{ text: 'Dashboard', path: { name: 'Dashboard' } },
-					{ text: 'Login', path: { name: 'Login' } },
-					{ text: 'Registration', path: { name: 'Registration' } },
-				],
-				dropdownItems: [
-					// TODO: add Profile path
-					{ text: 'Profile', path: { name: 'Profile' } },
-					{ text: 'Sign out', path: { name: 'Login' } },
-				],
-				showDropdown: false,
-				showMenu: false, // Mobile resolution
-			};
+		setup() {
+			const mainItems = ref([
+				{ text: 'Dashboard', path: { name: 'Dashboard' } },
+				{ text: 'Login', path: { name: 'Login' } },
+				{ text: 'Registration', path: { name: 'Registration' } },
+			]);
+			const dropdownItems = ref([
+				// TODO: add Profile path
+				{ text: 'Profile', path: { name: 'Profile' } },
+				{ text: 'Sign out', path: { name: 'Login' } },
+			]);
+			const showDropdown = ref(false);
+			const showMenu = ref(false);
+
+			const router = useRouter();
+
+			function handleLogout() {
+				logout();
+				router.push('/login');
+			}
+
+			return { mainItems, dropdownItems, showDropdown, showMenu, handleLogout };
 		},
 	};
 </script>
