@@ -6,6 +6,11 @@ html,
 body {
 	min-height: 100vh;
 }
+#app {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
 
 /* Router animation */
 .route-enter-from,
@@ -21,4 +26,18 @@ body {
 .route-leave-from {
 	opacity: 1;
 	transform: translateY(0);
+}
+
+/* Custom scroll */
+.custom-scroll::-webkit-scrollbar {
+	width: 6px;
+	cursor: pointer;
+}
+.custom-scroll::-webkit-scrollbar-track {
+	background-color: #e2e8f0;
+	cursor: pointer;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+	background-color: #a0aec0;
+	cursor: pointer;
 }
