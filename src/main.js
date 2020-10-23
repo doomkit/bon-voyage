@@ -11,6 +11,7 @@ import {
 	faSignInAlt,
 	faEnvelope,
 	faSignOutAlt,
+	faSmile,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Pages
@@ -27,7 +28,14 @@ import Button from './components/ui/button';
 import { isAuthenticated } from './services/auth';
 import { ClickOutsideDirective } from './directives/click-outside';
 
-library.add([faUserCircle, faUnlockAlt, faSignInAlt, faEnvelope, faSignOutAlt]);
+library.add([
+	faUserCircle,
+	faUnlockAlt,
+	faSignInAlt,
+	faEnvelope,
+	faSignOutAlt,
+	faSmile,
+]);
 
 const router = createRouter({
 	history: createWebHistory(),
