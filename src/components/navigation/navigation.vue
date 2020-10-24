@@ -34,7 +34,9 @@
 											aria-haspopup="true"
 											@click.stop="showDropdown = !showDropdown"
 										>
-											<div class="h-8 w-8 rounded-full bg-gray-500"></div>
+											<div class="h-8 w-8 rounded-full bg-gray-500 flex justify-center items-center text-xl">
+												<font-awesome-icon icon="smile" />
+											</div>
 										</button>
 									</dropdown>
 								</div>
