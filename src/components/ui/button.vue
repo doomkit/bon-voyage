@@ -9,7 +9,12 @@
 		}"
 	>
 		<span
-			class="text-indigo-400 absolute left-0 inset-y-0 flex items-center pl-3"
+			class="absolute left-0 inset-y-0 flex items-center pl-3"
+			:class="{
+				'text-indigo-400': !color || color === 'primary',
+				'text-red-400': color === 'danger',
+				'text-gray-400': color === 'secondary'
+			}"
 		>
 			<font-awesome-icon v-if="iconClass" :icon="iconClass" />
 		</span>
