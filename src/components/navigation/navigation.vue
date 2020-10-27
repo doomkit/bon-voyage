@@ -75,13 +75,10 @@
 		setup() {
 			const mainItems = ref([
 				{ text: 'Dashboard', path: { name: 'Dashboard' } },
-				{ text: 'Login', path: { name: 'Login' } },
-				{ text: 'Registration', path: { name: 'Registration' } },
 			]);
 			const dropdownItems = ref([
-				// TODO: add Profile path
 				{ text: 'Profile', path: { name: 'Profile' } },
-				{ text: 'Sign out', path: { name: 'Login' } },
+				{ text: 'Sign out', path: { name: 'Login' }, handle: handleLogout },
 			]);
 			const showDropdown = ref(false);
 			const showMenu = ref(false);

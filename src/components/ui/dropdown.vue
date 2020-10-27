@@ -19,7 +19,7 @@
 							@click="
 								() => {
 									$emit('update:show', false);
-									navigate;
+									item.handle ? item.handle() : navigate;
 								}
 							"
 							:class="[isActive && 'font-bold bg-gray-100']"
