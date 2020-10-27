@@ -12,6 +12,8 @@ import {
 	faEnvelope,
 	faSignOutAlt,
 	faSmile,
+	faEdit,
+	faTrash
 } from '@fortawesome/free-solid-svg-icons';
 
 // Pages
@@ -35,6 +37,8 @@ library.add([
 	faEnvelope,
 	faSignOutAlt,
 	faSmile,
+	faEdit,
+	faTrash
 ]);
 
 const router = createRouter({

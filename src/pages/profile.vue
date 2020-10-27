@@ -45,8 +45,8 @@
 
 			<h2 class="text-gray-600 text-sm pb-2 mb-4 mt-6 uppercase font-thin border-b">Account actions</h2>
 			<div class="flex space-x-2">
-				<the-button type="button" text="Edit information" color="secondary"></the-button>
-				<the-button type="button" text="Delete account"  color="danger"></the-button>
+				<the-button type="button" text="Edit information" color="secondary" iconClass="edit"></the-button>
+				<the-button type="button" text="Delete account"  color="danger" iconClass="trash"></the-button>
 			</div>
 		</div>
   </div>
