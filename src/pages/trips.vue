@@ -27,41 +27,38 @@ import { getUserCoordinates } from '../services/geolocation';
 export default {
 	setup() {
 		const geoPermission = ref('');
+		let map;
+
+		function flyToLocation(location) {
+			const lng = location.coords.longitude;
+			const lat = location.coords.latitude;
+			map.flyTo({
+				center: [lng, lat],
+				essential: true,
+				zoom: 11,
+			});
+		}
+
+		function say(words) {
+			alert(words);
+		}
 
 		onMounted(() => {
 			mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_KEY;
-			const map = new mapboxgl.Map({
+			map = new mapboxgl.Map({
 				container: 'mapContainer',
 				style: 'mapbox://styles/mapbox/streets-v11',
 				zoom: 3,
 			});
 
-			function flyToLocation(location) {
-				const lng = location.coords.longitude;
-				const lat = location.coords.latitude;
-				map.flyTo({
-					center: [lng, lat],
-					essential: true,
-					zoom: 11,
-				});
-			}
-
-			function locationIsNotProvided() {
-				console.warn('Failed to get current location');
-			}
-
 			navigator.permissions.query({ name: 'geolocation' }).then(permission => {
 				geoPermission.value = permission.state;
 				permission.onchange = () => {
 					geoPermission.value = permission.state;
-					getUserCoordinates(flyToLocation, locationIsNotProvided);
+					getUserCoordinates(flyToLocation);
 				};
 			});
 		});
-
-		function say(words) {
-			alert(words);
-		}
 
 		return { say, geoPermission };
 	},
